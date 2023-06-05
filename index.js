@@ -1,5 +1,7 @@
 
 const express = require('express');
+// me traigo el db
+const db = require('./db');
 //ejecutar express
 const app = express();
 
@@ -12,7 +14,16 @@ app.get('/health', (req, res) => {
     return res.send('healthy');
 })
 
-//esto es para que me haga la lectura de todo
-app.listen(3000, () => {
-    console.log('server is running on port:' + PORT);
+db.then(() => {
+    //si esto va bien se ejecuta con promesas
+    //esto es para que me haga la lectura de todo
+    app.listen(PORT, () => {
+        console.log('server is running on port:' + PORT);
+    })
+}
+).catch((error) => {
+    console.error('Error starting server', error.message)
 })
+
+
+
