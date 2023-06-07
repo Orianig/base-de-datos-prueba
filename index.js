@@ -9,8 +9,6 @@ const db = require('./db');
 const router = require('./router');
 //me requiere el middleware
 const auth = require('./middlewares/verifyToken');
-//aqui requiero el authController
-const authController = require('./controllers/authController');
 //ejecutar express
 const app = express();
 //para concatenar
@@ -33,7 +31,7 @@ app.get('/health', auth, (req, res) => { //el auth lo agrego si quiero meterle e
 db.then(() => {
     //si esto va bien se ejecuta con promesas
     //esto es para que me haga la lectura de todo
-    app.listengit (PORT, () => {
+    app.listen (PORT, () => {
         console.log('server is running on port:' + PORT);
     })
 }
